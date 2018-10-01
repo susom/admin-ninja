@@ -1,0 +1,62 @@
+{
+  "name": "Admin Ninja",
+
+  "namespace":"Stanford\\AdminNinja",
+
+  "description": "A module for making redcap superusers more dangerous",
+
+  "authors": [
+    {
+      "name": "Alvaro Alvarez",
+      "email": "alvaro1@stanford.edu",
+      "institution": "Stanford University"
+    },
+    {
+      "name": "Andy Martin",
+      "email": "andy123@stanford.edu",
+      "institution": "Stanford University"
+    }
+  ],
+
+  "permissions": [
+    "hook_every_page_top"
+  ],
+
+  "enable-every-page-hooks-on-system-pages": true,
+
+  "links": {
+    "control-center": [
+      {
+        "name": "Admin Ninja",
+        "icon": "gear",
+        "url": "menu.php"
+      }
+    ],
+    "project": [
+    ]
+  },
+
+  "system-settings": [
+    {
+      "key": "superuser-preferences",
+      "name": "<b>Superuser Preferences</b> Pinned Projects, Hotkeys, etc...",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "key": "enbale-survey-link-lookup",
+      "name": "<b>Enable Survey Link Lookup</b> To enable survey link lookups from the ninja-search box, download Luke Steven's SurveyLinkLookup and then check this box.",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
+      "key": "enable-system-debug-logging",
+      "name": "<b>Enable Debug Logging (system-wide)</b>",
+      "required": false,
+      "type": "checkbox"
+    }
+  ],
+
+  "project-settings": [
+  ]
+}
