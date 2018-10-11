@@ -65,36 +65,80 @@ SAN.init = function() {
     // Bind buttons
     // $('.container').on('click', 'button', dc.buttonPress);
 
-    // DOES PAGE HAVE NAVBAR - IF SO ADD CUSTOM SEARCH
-    if ( $('#redcap-home-navbar-collapse').is(':visible') ) {
-        // Append the search box
-        SAN.searchElement = $('<select id="san_nav_search"></select>')
-            .addClass('nav-link')
-            .wrap('<li class="nav-item"></li>').parent().insertAfter($('#redcap-home-navbar-collapse ul:first li:last'));
 
-        SAN.searchElement.select2({
-           allowClear: true,
-           ajax: {
-               url: SAN.ajax_endpoint,
-               dataType: 'json',
-               delay: 1250,         // wait 250ms before trigging ajax call
-               cache: true,
-               // data: function(params){
-               //     var query = {
-               //         search: params.term,
-               //         type: 'getAllProjects'
-               //     };
-               //     return query;
-               // },
-               processResults: function (data) {
-                   return {
-                       results: data.results
-                   };
-               }
-           },
-           placeholder: 'Ninja It',
-       }).bind('change',function() { console.log( "Val Changed")});
+
+    // Append the search box
+    SAN.searchElement = $('<select id="san_nav_search"></select>');
+
+    var search_container = $('<div class="san_nav_search_container"></div>')
+        .append(SAN.searchElement);
+
+    var icon = $('<i class="ninja-icon fas fa-user-ninja"></i>');
+    var topbar = $('<div/>')
+        .append(icon)
+        .append(search_container)
+        .addClass('ninja-bar');
+
+
+
+
+
+
+
+    //     .append(icon)
+    //     .append(SAN.searchElement)
+    //
+    //     .prependTo('#pagecontent');
+    //     // .addClass('nav-link')
+    //     // .insertBefore($('#redcap-home-navbar-collapse ul:first li:first'));
+
+    SAN.searchElement.select2({
+        allowClear: true,
+        width: '100%',
+        // minimumInputLength: 1,
+        ajax: {
+            url: SAN.ajax_endpoint,
+            dataType: 'json',
+            delay: 250,         // wait 250ms before trigging ajax call
+            cache: true,
+            // data: function(params){
+            //     var query = {
+            //         search: params.term,
+            //         type: 'getAllProjects'
+            //     };
+            //     return query;
+            // },
+            processResults: function (data) {
+                return {
+                    results: data.results
+                };
+            }
+        },
+        placeholder: 'Ninja It',
+    }).bind('change',function() {
+
+        var active = $(this).val();
+
+        console.log( "Val Changed", this, active);
+
+    });
+
+
+
+
+
+    // Add toolbar to project pages
+    if ( $('#west:visible')) {
+        console.log("HI");
+        $('.mainwindow').prepend(topbar);
     }
+
+    // Add toolbar to navbar pages
+    if ( $('#redcap-home-navbar-collapse').is(':visible') ) {
+        $('#pagecontent').prepend(topbar);
+    }
+
+
 
 };
 

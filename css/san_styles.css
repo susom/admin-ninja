@@ -169,8 +169,63 @@ input.shell-searchbox {
 }
 
 
+#san_nav_search {
+    width: 400px;
+}
 
+.mainwindow {
+    /*make space for ninja bar*/
+    margin-top: 30px;
+}
+
+.fixed-top {
+    /*make space for ninja bar*/
+    top:30px;
+}
+
+.ninja-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background: #666;
+    height: 30px;
+}
+
+
+
+.navbar-brand {
+    /*margin-left: 14px;*/
+}
+.ninja-icon {
+    font-size: 12pt;
+    color: white;
+    vertical-align:-webkit-baseline-middle;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.san_nav_search_container {
+    display: inline-block;
+    width: 30%;
+}
+
+.san_nav_search_container .select2-container {
+    width: 100%;
+}
 
 #san_nav_search {
-    width: 200px;
+    width: 100%;
 }
+
+
+
+
+    /*width: 400px;*/
+    /*position: fixed;*/
+    /*top: 5px;*/
+    /*left: 5px;*/
+    /*z-index: 10001;*/
+/*}*/
+

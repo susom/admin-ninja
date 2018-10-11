@@ -14,14 +14,33 @@ if (!SUPER_USER) {
 
 $module->emDebug("Here with: ", $_POST);
 
-if (isset($_GET['_type']) && $_GET['_type'] == "query") {
-    //if (isset($_POST['getProjects'])) {
-        // Get all projects
-        $q = isset($_GET['q']) ? $_GET['q'] : null;
-        $projects = Utilities::getAllProjectOptions($q);
 
-        // Add option for ALL projects
-        array_unshift($projects, array("id"=>"-- ALL", "text"=>"ALL " . count($projects) . " PROJECTS --"));
+if (isset($_GET['_type']) && $_GET['_type'] == "query") {
+
+    // Get filter
+    $q = isset($_GET['q']) ? $_GET['q'] : null;
+
+    $results = array();
+
+    // Search Projects
+    $projects = Utilities::getAllProjectOptions($q);
+    $results[] = array(
+        "text" => "Projects",
+        "children" => $projects
+    );
+
+
+    // Search Users
+    $users = Utilities::buildUserOptions($q);
+    $results[] = array(
+        "text" => "Users",
+        "children" => $users
+    );
+
+
+
+
+
 
         // Return Results
         header("Content-type: application/json");
@@ -34,16 +53,18 @@ if (isset($_GET['_type']) && $_GET['_type'] == "query") {
         //    )
         //));
         //
-        echo json_encode(
-            [
-                "results" => [
-                    [
-                        "text" => "Projects",
-                        "children" => $projects
-                    ]
-                ]
-            ]
-        );
+
+        echo json_encode([ "results" => $results  ]);
+        //echo json_encode(
+        //    [
+        //        "results" => [
+        //            [
+        //                "text" => "Projects",
+        //                "children" => $projects
+        //            ]
+        //        ]
+        //    ]
+        //);
     //}
 }
 

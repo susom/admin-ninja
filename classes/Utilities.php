@@ -44,12 +44,45 @@ class Utilities
         foreach ($projects as $pid => $title) {
             $options[] = array(
                 "id" => $pid,
-                "text" => "[" . $pid . "] " . $title
+                "text" => "[" . $pid . "] " . $title,
+                "foo" => "bar"
             );
         }
         return $options;
     }
 
+
+    public static function buildLikeFilter($field_array, $query) {
+        $output = array();
+        foreach ($field_array as $field) $output[] = "$field LIKE '%" . $query . "%'";
+        return implode(" OR ", $output);
+    }
+
+
+    public static function searchUsers($filterString) {
+        $search_fields=["username", "user_email", "user_firstname", "user_lastname"];
+
+        $sql = "select * from redcap_user_information";
+        if (!empty($filterString)) $sql .= " WHERE " . self::buildLikeFilter($search_fields, $filterString);
+        $q = db_query($sql);
+        $users = array();
+        while ($row = db_fetch_assoc($q)) {
+            $users[] = $row;
+        }
+        return $users;
+    }
+
+    public static function buildUserOptions($filterString) {
+        $users = self::searchUsers($filterString);
+        $options = array();
+        foreach ($users as $user) {
+            $options[] = array(
+                "id" => $user['username'],
+                "text" => $user['user_lastname'] . ", " . $user['user_firstname'] . " (" . $user['username'] . ") - " . $user['user_email']
+            );
+        }
+        return $options;
+    }
 
 
 
