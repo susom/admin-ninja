@@ -41,7 +41,7 @@ class AdminNinja extends \ExternalModules\AbstractExternalModule
         <script>
             // Single global scope object containing all variables/functions
             var SAN = SAN || {};
-            SAN.isDev = <?php echo $this->getSystemSetting("enable-system-debug-logging"); ?>;
+            SAN.isDev = <?php echo ($this->getSystemSetting("enable-system-debug-logging") == 1); ?>;
             SAN.ajax_endpoint="<?php echo $this->getUrl('pages/ajax.php'); ?>";
         </script>
         <?php
