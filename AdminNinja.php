@@ -19,6 +19,10 @@ class AdminNinja extends \ExternalModules\AbstractExternalModule
 
     }
 
+    function redcap_custom_verify_username($username) {
+        return array("status"=>FALSE, "message", "SOMETHING ELSE");
+    }
+
     function injectNinja() {
         // Insert CSS
         ?>

@@ -19,7 +19,8 @@
   ],
 
   "permissions": [
-    "hook_every_page_top"
+    "hook_every_page_top",
+    "redcap_custom_verify_username"
   ],
 
   "enable-every-page-hooks-on-system-pages": true,
